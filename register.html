@@ -109,7 +109,17 @@ footer {
 
 <h2>Register for KettleMUN III</h2>
 
-<form id="customForm">
+<form 
+action="https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/formResponse" 
+method="POST" 
+target="hidden_iframe"
+onsubmit="submitted=true;"
+>
+
+<!-- Required hidden fields -->
+<input type="hidden" name="fvv" value="1">
+<input type="hidden" name="fbzx" value="1234567890">
+<input type="hidden" name="pageHistory" value="0">
 
 <label>Full Name</label>
 <input type="text" name="entry.1443637798" required>
@@ -124,12 +134,15 @@ footer {
 <select name="entry.830382605" required>
 <option value="">Select a committee</option>
 <option>Option 1</option>
+<option>Option 2</option>
 </select>
 
 <label>Role</label>
 <select name="entry.137987200" required>
 <option value="">Select role</option>
-<option>Option 1</option>
+<option>Delegate</option>
+<option>Chair</option>
+<option>Crisis Staff</option>
 </select>
 
 <button type="submit">Submit Registration</button>
@@ -140,30 +153,23 @@ Thank you for registering for KettleMUN III!
 
 </form>
 
+<!-- Hidden iframe (prevents redirect) -->
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
 <footer>
 © 2026 KettleMUN III · Excellence in Diplomacy
 </footer>
 
 <script>
-document.getElementById("customForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+var submitted = false;
 
-    const form = this;
-    const data = new FormData(form);
-
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/formResponse", {
-        method: "POST",
-        body: data,
-        mode: "no-cors"
-    });
-
-    document.getElementById("successMessage").style.display = "block";
-    form.reset();
+document.querySelector("iframe[name='hidden_iframe']").addEventListener("load", function () {
+    if (submitted) {
+        document.getElementById("successMessage").style.display = "block";
+        document.querySelector("form").reset();
+    }
 });
 </script>
 
 </body>
 </html>
-
-
-
