@@ -145,25 +145,25 @@ Thank you for registering for KettleMUN III!
 </footer>
 
 <script>
-const form = document.getElementById("customForm");
-
-form.addEventListener("submit", function(e) {
+document.getElementById("customForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const formData = new FormData(form);
+    const form = this;
+    const data = new FormData(form);
 
-    fetch("<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/viewform?embedded=true" width="640" height="1054" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>", {
+    fetch("https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/formResponse", {
         method: "POST",
-        mode: "no-cors",
-        body: formData
-    }).then(() => {
-        document.getElementById("successMessage").style.display = "block";
-        form.reset();
+        body: data,
+        mode: "no-cors"
     });
+
+    document.getElementById("successMessage").style.display = "block";
+    form.reset();
 });
 </script>
 
 </body>
 </html>
+
 
 
