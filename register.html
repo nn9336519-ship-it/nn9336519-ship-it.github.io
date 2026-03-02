@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Committees | KettleMUN III</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #f8f6f3;
+    color: #1a1a1a;
+}
+
+nav {
+    background: #0b1c2d;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    color: white;
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: #d9d9d9;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px 40px;
+}
+
+.hero h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #555;
+    font-size: 18px;
+}
+
+.committee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    padding: 40px 80px 100px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.card p {
+    color: #555;
+    line-height: 1.6;
+}
+
+footer {
+    background: #0b1c2d;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h1>KettleMUN III</h1>
+    <div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="committees.html">Committees</a>
+        <a href="schedule.html">Schedule</a>
+        <a href="secretariat.html">Secretariat</a>
+        <a href="register.html">Register</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</nav>
+
+<section class="hero">
+    <h2>Our Committees</h2>
+    <p>Explore the forums shaping global diplomacy at KettleMUN III.</p>
+</section>
+
+<div class="committee-grid" id="committeeContainer"></div>
+
+<footer>
+© 2026 KettleMUN III · Excellence in Diplomacy
+</footer>
+
+<script>
+const SHEET_ID = "1lggUftAi5KCErYMSidZ_XY5Iu6uZRl6KEZjLtQ130pE";
+const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Committees`;
+
+fetch(url)
+.then(response => response.text())
+.then(data => {
+    const rows = data.split("\n").slice(1);
+    const container = document.getElementById("committeeContainer");
+
+    rows.forEach(row => {
+        const columns = row.split(",");
+        if(columns.length >= 2) {
+            const name = columns[0];
+            const description = columns[1];
+            const image = columns[2] || "https://via.placeholder.com/400";
+
+            if(name.trim() !== "") {
+                container.innerHTML += `
+                    <div class="card">
+                        <img src="${image}" alt="${name}">
+                        <h3>${name}</h3>
+                        <p>${description}</p>
+                    </div>
+                `;
+            }
+        }
+    });
+})
+.catch(error => {
+    document.getElementById("committeeContainer").innerHTML =
+    "<p style='text-align:center;'>Could not load committees. Make sure your sheet is set to 'Anyone with the link → Viewer'.</p>";
+});
+</script>
+
+</body>
+</html>

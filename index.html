@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KettleMUN III</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <h1>KettleMUN III</h1>
+    <div>
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="committees.html">COMMITTEES</a>
+        <a href="schedule.html">SCHEDULE</a>
+        <a href="secretariat.html">SECRETARIAT</a>
+        <a href="register.html">REGISTER</a>
+        <a href="contact.html">CONTACT</a>
+    </div>
+</nav>
+
+<div class="hero fade-in">
+    <h2>KettleMUN III</h2>
+    <p>January 23–24, 2026 · Kettle Run High School</p>
+
+    <div id="countdown"></div>
+
+    <a href="register.html" class="button">REGISTER NOW</a>
+</div>
+
+<div class="section fade-in">
+    <h2>An Invitation to Lead</h2>
+    <p>
+        KettleMUN III brings together ambitious student diplomats
+        for a conference rooted in intellectual rigor, collaboration,
+        and meaningful global discourse.
+    </p>
+</div>
+
+<footer>
+    © 2026 KettleMUN III · Kettle Run Model United Nations
+</footer>
+
+<script>
+// FADE IN
+const faders = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('show');
+        obs.unobserve(entry.target);
+    });
+}, { threshold: 0.2 });
+
+faders.forEach(fader => observer.observe(fader));
+
+// COUNTDOWN
+const countdown = document.getElementById("countdown");
+const targetDate = new Date("January 23, 2026 08:00:00").getTime();
+
+setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    countdown.innerHTML = `
+        <div class="timer-box">
+            <span>${days}</span>
+            <small>DAYS</small>
+        </div>
+        <div class="timer-box">
+            <span>${hours}</span>
+            <small>HOURS</small>
+        </div>
+        <div class="timer-box">
+            <span>${minutes}</span>
+            <small>MINUTES</small>
+        </div>
+    `;
+}, 1000);
+</script>
+
+</body>
+</html>

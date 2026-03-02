@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0c1425;
+    color: #e6e6e6;
+    overflow-x: hidden;
+}
+
+/* NAVIGATION */
+nav {
+    position: fixed;
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(12,20,37,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+}
+
+nav h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    color: #d4af37;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background: linear-gradient(
+        -45deg,
+        #0c1425,
+        #111c33,
+        #162447,
+        #0c1425
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 70px;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #bbbbbb;
+}
+
+.button {
+    margin-top: 40px;
+    padding: 14px 35px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all 0.4s ease;
+}
+
+.button:hover {
+    background: #d4af37;
+    color: #0c1425;
+}
+
+/* SECTION */
+.section {
+    padding: 140px 15%;
+}
+
+.section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+/* FEATURE LIST */
+.committee-list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.committee-item {
+    border-left: 2px solid #d4af37;
+    padding-left: 25px;
+    transition: 0.3s ease;
+}
+
+.committee-item:hover {
+    transform: translateX(8px);
+}
+
+/* FOOTER */
+footer {
+    padding: 80px;
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+}
+
+/* FADE */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s ease;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* COUNTDOWN */
+#countdown {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+.timer-box {
+    text-align: center;
+}
+
+.timer-box span {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: #d4af37;
+}
+
+.timer-box small {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    color: #aaa;
+}
