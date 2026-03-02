@@ -154,7 +154,7 @@ form.addEventListener("submit", function(e) {
 
     const formData = new FormData(form);
 
-    fetch("https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/formResponse", {
+    fetch("<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/viewform?embedded=true" width="640" height="1054" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>", {
         method: "POST",
         mode: "no-cors",
         body: formData
@@ -167,3 +167,4 @@ form.addEventListener("submit", function(e) {
 
 </body>
 </html>
+
