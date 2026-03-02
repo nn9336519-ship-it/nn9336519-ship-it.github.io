@@ -35,55 +35,36 @@ nav a:hover {
     color: white;
 }
 
-h2 {
+.hero {
     text-align: center;
-    margin-top: 40px;
+    padding: 100px 20px;
 }
 
-form {
-    max-width: 600px;
-    margin: 40px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin-top: 20px;
-    font-weight: bold;
+.hero p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #444;
 }
 
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    margin-top: 30px;
-    padding: 14px;
-    width: 100%;
+.register-btn {
     background: #0b1c2d;
     color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
+    padding: 18px 40px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 8px;
+    display: inline-block;
+    transition: 0.3s ease;
 }
 
-button:hover {
+.register-btn:hover {
     background: #1b2f48;
-}
-
-.success {
-    text-align: center;
-    margin-top: 20px;
-    color: green;
-    display: none;
+    transform: translateY(-2px);
 }
 
 footer {
@@ -91,7 +72,7 @@ footer {
     color: white;
     text-align: center;
     padding: 30px;
-    margin-top: 60px;
+    margin-top: 120px;
 }
 </style>
 </head>
@@ -107,69 +88,25 @@ footer {
 </div>
 </nav>
 
+<section class="hero">
 <h2>Register for KettleMUN III</h2>
+<p>
+Join us for a weekend of diplomacy, debate, and excellence.  
+Click below to complete your registration.
+</p>
 
-<form 
-action="https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/formResponse" 
-method="POST" 
-target="hidden_iframe"
-onsubmit="submitted=true;"
->
+<a 
+href="https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/viewform" 
+target="_blank" 
+class="register-btn">
+Register Now
+</a>
 
-<!-- Required hidden fields -->
-<input type="hidden" name="fvv" value="1">
-<input type="hidden" name="fbzx" value="1234567890">
-<input type="hidden" name="pageHistory" value="0">
-
-<label>Full Name</label>
-<input type="text" name="entry.1443637798" required>
-
-<label>Email</label>
-<input type="email" name="entry.69260781" required>
-
-<label>School</label>
-<input type="text" name="entry.1897826115" required>
-
-<label>Committee</label>
-<select name="entry.830382605" required>
-<option value="">Select a committee</option>
-<option>Option 1</option>
-<option>Option 2</option>
-</select>
-
-<label>Role</label>
-<select name="entry.137987200" required>
-<option value="">Select role</option>
-<option>Delegate</option>
-<option>Chair</option>
-<option>Crisis Staff</option>
-</select>
-
-<button type="submit">Submit Registration</button>
-
-<div class="success" id="successMessage">
-Thank you for registering for KettleMUN III!
-</div>
-
-</form>
-
-<!-- Hidden iframe (prevents redirect) -->
-<iframe name="hidden_iframe" style="display:none;"></iframe>
+</section>
 
 <footer>
 © 2026 KettleMUN III · Excellence in Diplomacy
 </footer>
-
-<script>
-var submitted = false;
-
-document.querySelector("iframe[name='hidden_iframe']").addEventListener("load", function () {
-    if (submitted) {
-        document.getElementById("successMessage").style.display = "block";
-        document.querySelector("form").reset();
-    }
-});
-</script>
 
 </body>
 </html>
