@@ -4,135 +4,86 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register | KettleMUN III</title>
+
 <style>
 body {
-    font-family: 'Georgia', serif;
-    background: #f8f6f3;
-    color: #1a1a1a;
-    padding: 40px;
-}
-nav {
-    background: #0b1c2d;
-    padding: 20px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-nav h1 {
-    color: white;
     margin: 0;
-    font-size: 22px;
+    font-family: 'Georgia', serif;
+    background-color: #f4f6f9;
+    color: #0b1c2d;
 }
+
+/* Navigation */
+nav {
+    background-color: #0b1c2d;
+    padding: 15px;
+    text-align: center;
+}
+
 nav a {
-    color: #d9d9d9;
+    color: white;
     text-decoration: none;
-    margin-left: 30px;
-    font-size: 14px;
+    margin: 0 15px;
+    font-weight: bold;
 }
-nav a:hover { color: white; }
-h2 { text-align: center; margin-bottom: 20px; }
-form {
-    max-width: 600px;
-    margin: auto;
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Page Title */
+h2 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 32px;
+}
+
+/* Form Card */
+.form-wrapper {
+    max-width: 700px;
+    margin: 40px auto 80px auto;
     background: white;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
-form label { display: block; margin-top: 15px; font-weight: bold; }
-form input, form select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
-form button {
-    margin-top: 20px;
-    padding: 12px;
-    width: 100%;
-    background: #0b1c2d;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-form button:hover { background: #1b2f48; }
+
+/* Footer */
 footer {
-    background: #0b1c2d;
-    color: white;
     text-align: center;
-    padding: 30px;
-    margin-top: 50px;
+    padding: 20px;
+    background-color: #0b1c2d;
+    color: white;
+    font-size: 14px;
 }
 </style>
+
 </head>
 <body>
 
 <nav>
-    <h1>KettleMUN III</h1>
-    <div>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="committees.html">Committees</a>
-        <a href="schedule.html">Schedule</a>
-        <a href="secretariat.html">Secretariat</a>
-        <a href="register.html">Register</a>
-        <a href="contact.html">Contact</a>
-    </div>
+    <a href="index.html">Home</a>
+    <a href="committees.html">Committees</a>
+    <a href="register.html">Register</a>
 </nav>
 
 <h2>Register for KettleMUN III</h2>
 
-<form id="registrationForm">
-    <label for="fullname">Full Name</label>
-    <input type="text" id="fullname" name="fullname" required>
-
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="school">School</label>
-    <input type="text" id="school" name="school" required>
-
-    <label for="committee">Committee</label>
-    <select id="committee" name="committee" required>
-        <option value="">Select a committee</option>
-    </select>
-
-    <label for="role">Role</label>
-    <input type="text" id="role" name="role" placeholder="Delegate, Chair, etc." required>
-
-    <button type="submit">Submit Registration</button>
-</form>
+<div class="form-wrapper">
+    <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfvKsVMjOISKQipTZkkFKUMVm0zrSL0dztFTwyBkgra3buXCA/viewform?embedded=true" 
+        width="100%" 
+        height="1100" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0">
+        Loading…
+    </iframe>
+</div>
 
 <footer>
-© 2026 KettleMUN III · Excellence in Diplomacy
+    © 2026 KettleMUN III · Excellence in Diplomacy
 </footer>
-
-<script>
-const SHEET_ID = "1lggUftAi5KCErYMSidZ_XY5Iu6uZRl6KEZjLtQ130pE"; // Your Google Sheet ID
-const committeeSelect = document.getElementById("committee");
-
-// Populate committee dropdown from Committees tab
-fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Committees`)
-.then(res => res.text())
-.then(data => {
-    const rows = data.split("\n").slice(1);
-    rows.forEach(row => {
-        const columns = row.split(",");
-        const name = columns[0];
-        if(name.trim() !== "") {
-            const option = document.createElement("option");
-            option.value = name;
-            option.textContent = name;
-            committeeSelect.appendChild(option);
-        }
-    });
-});
-
-// Submit registration to Google Sheet using Google Forms (or you can set up Google Apps Script later)
-const form = document.getElementById("registrationForm");
-form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    alert("Thank you! Your registration has been submitted.");
-    form.reset();
-});
-</script>
 
 </body>
 </html>
