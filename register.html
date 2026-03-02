@@ -3,16 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Committees | KettleMUN III</title>
-
+<title>Register | KettleMUN III</title>
 <style>
 body {
-    margin: 0;
     font-family: 'Georgia', serif;
     background: #f8f6f3;
     color: #1a1a1a;
+    padding: 40px;
 }
-
 nav {
     background: #0b1c2d;
     padding: 20px 60px;
@@ -20,83 +18,50 @@ nav {
     justify-content: space-between;
     align-items: center;
 }
-
 nav h1 {
     color: white;
     margin: 0;
     font-size: 22px;
-    letter-spacing: 1px;
 }
-
 nav a {
     color: #d9d9d9;
     text-decoration: none;
     margin-left: 30px;
     font-size: 14px;
 }
-
-nav a:hover {
-    color: white;
-}
-
-.hero {
-    text-align: center;
-    padding: 80px 20px 40px;
-}
-
-.hero h2 {
-    font-size: 42px;
-    margin-bottom: 10px;
-}
-
-.hero p {
-    color: #555;
-    font-size: 18px;
-}
-
-.committee-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    padding: 40px 80px 100px;
-}
-
-.card {
+nav a:hover { color: white; }
+h2 { text-align: center; margin-bottom: 20px; }
+form {
+    max-width: 600px;
+    margin: auto;
     background: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
 }
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card img {
+form label { display: block; margin-top: 15px; font-weight: bold; }
+form input, form select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 4px; border: 1px solid #ccc; }
+form button {
+    margin-top: 20px;
+    padding: 12px;
     width: 100%;
+    background: #0b1c2d;
+    color: white;
+    border: none;
     border-radius: 6px;
-    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 16px;
 }
-
-.card h3 {
-    margin: 10px 0;
-}
-
-.card p {
-    color: #555;
-    line-height: 1.6;
-}
-
+form button:hover { background: #1b2f48; }
 footer {
     background: #0b1c2d;
     color: white;
     text-align: center;
     padding: 30px;
+    margin-top: 50px;
 }
 </style>
 </head>
-
 <body>
 
 <nav>
@@ -112,49 +77,60 @@ footer {
     </div>
 </nav>
 
-<section class="hero">
-    <h2>Our Committees</h2>
-    <p>Explore the forums shaping global diplomacy at KettleMUN III.</p>
-</section>
+<h2>Register for KettleMUN III</h2>
 
-<div class="committee-grid" id="committeeContainer"></div>
+<form id="registrationForm">
+    <label for="fullname">Full Name</label>
+    <input type="text" id="fullname" name="fullname" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="school">School</label>
+    <input type="text" id="school" name="school" required>
+
+    <label for="committee">Committee</label>
+    <select id="committee" name="committee" required>
+        <option value="">Select a committee</option>
+    </select>
+
+    <label for="role">Role</label>
+    <input type="text" id="role" name="role" placeholder="Delegate, Chair, etc." required>
+
+    <button type="submit">Submit Registration</button>
+</form>
 
 <footer>
 © 2026 KettleMUN III · Excellence in Diplomacy
 </footer>
 
 <script>
-const SHEET_ID = "1lggUftAi5KCErYMSidZ_XY5Iu6uZRl6KEZjLtQ130pE";
-const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Committees`;
+const SHEET_ID = "1lggUftAi5KCErYMSidZ_XY5Iu6uZRl6KEZjLtQ130pE"; // Your Google Sheet ID
+const committeeSelect = document.getElementById("committee");
 
-fetch(url)
-.then(response => response.text())
+// Populate committee dropdown from Committees tab
+fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Committees`)
+.then(res => res.text())
 .then(data => {
     const rows = data.split("\n").slice(1);
-    const container = document.getElementById("committeeContainer");
-
     rows.forEach(row => {
         const columns = row.split(",");
-        if(columns.length >= 2) {
-            const name = columns[0];
-            const description = columns[1];
-            const image = columns[2] || "https://via.placeholder.com/400";
-
-            if(name.trim() !== "") {
-                container.innerHTML += `
-                    <div class="card">
-                        <img src="${image}" alt="${name}">
-                        <h3>${name}</h3>
-                        <p>${description}</p>
-                    </div>
-                `;
-            }
+        const name = columns[0];
+        if(name.trim() !== "") {
+            const option = document.createElement("option");
+            option.value = name;
+            option.textContent = name;
+            committeeSelect.appendChild(option);
         }
     });
-})
-.catch(error => {
-    document.getElementById("committeeContainer").innerHTML =
-    "<p style='text-align:center;'>Could not load committees. Make sure your sheet is set to 'Anyone with the link → Viewer'.</p>";
+});
+
+// Submit registration to Google Sheet using Google Forms (or you can set up Google Apps Script later)
+const form = document.getElementById("registrationForm");
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Thank you! Your registration has been submitted.");
+    form.reset();
 });
 </script>
 
